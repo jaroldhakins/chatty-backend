@@ -1,19 +1,20 @@
 import expres, { Express } from 'express';
-import { ChattyServer } from './setupServer';
-import databaseConnection from './setupDatabase';
-import { config } from './config';
+import { CreafamServer } from '@root/setupServer';
+import databaseConnection from '@root/setupDatabase';
+import { config } from '@root/config';
 
 class Application {
     public initialize(): void {
         this.loadConfig();
         databaseConnection();
         const app: Express = expres();
-        const server: ChattyServer = new ChattyServer(app);
+        const server: CreafamServer = new CreafamServer(app);
         server.start();
     }
 
     private loadConfig(): void {
         config.validateConfig();
+        config.cloudinaryConfig();
     }
 }
 
