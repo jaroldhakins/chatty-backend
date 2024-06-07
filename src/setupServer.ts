@@ -6,20 +6,20 @@ import hpp from 'hpp';
 import compression from 'compression';
 import cookieSession from 'cookie-session';
 import HTTP_STATUS from 'http-status-codes';
-import { config } from './config';
+import { config } from '@root/config';
 import { Server } from 'socket.io';
 import { createClient } from 'redis';
 import { createAdapter } from '@socket.io/redis-adapter';
 import Logger from 'bunyan';
-import applicationRoutes from './routes';
+import applicationRoutes from '@root/routes';
 import 'express-async-errors';
-import { CustomeError, IErrorResponse } from './shared/globals/helpers/error-handler';
+import { CustomeError, IErrorResponse } from '@global/helpers/error-handler';
 
 
 const SERVER_PORT = 5000;
 const log: Logger = config.createLogger('server');
 
-export class ChattyServer {
+export class CreafamServer {
     private app: Application;
 
     constructor (app: Application) {
@@ -108,6 +108,7 @@ export class ChattyServer {
     }
 
     private startHttpServer(httpServer: http.Server): void {
+        log.info(`startHttpServer ${httpServer}`);
         log.info(`Server has started with process ${process.pid}`);
         this.app.listen(SERVER_PORT, () => {
             log.info(`Server running on port ${SERVER_PORT}`);
@@ -115,6 +116,6 @@ export class ChattyServer {
     }
 
     private socketIOConnections(io: Server): void {
-
+      log.info(`socketIOConnection ${io}`);
     }
 }
