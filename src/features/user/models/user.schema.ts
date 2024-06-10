@@ -3,9 +3,7 @@ import mongoose, { model, Model, Schema } from 'mongoose';
 
 const userSchema: Schema = new Schema({
   authId: { type: mongoose.Schema.Types.ObjectId, ref: 'Auth', index: true },
-  profilePicture: { type: String, default: '' },
-  passwordResetToken: { type: String, default: '' },
-  passwordResetExpires: { type: Number }
+  profilePicture: { type: String, default: '' }
 });
 
 const UserModel: Model<IUserDocument> = model<IUserDocument>('User', userSchema, 'User');

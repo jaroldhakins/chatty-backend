@@ -7,6 +7,11 @@ import { authService } from '@service/db/auth.service';
 import { BadRequestError } from '@global/helpers/error-handler';
 import { loginSchema } from '@auth/schemes/signin';
 import { IAuthDocument } from '@auth/interfaces/auth.interface';
+// import { emailQueue } from '@service/queues/email.queue';
+// import moment from 'moment';
+// import publicIP from 'ip';
+// import { resetPasswordTemplate } from '@service/emails/templates/reset-password/reset-password-template';
+// import { IResetPasswordParams } from '@user/interfaces/user.interface';
 
 
 export class SignIn {
@@ -33,9 +38,16 @@ export class SignIn {
       config.JWT_TOKEN!
     );
 
-    req.session = { jwt: userJwt };
+    // const templateParams: IResetPasswordParams = {
+    //   username: existingUser!.username,
+    //   email: existingUser!.email,
+    //   ipaddress: publicIP.address(),
+    //   date: moment().format('DD/MM/YYYY HH:mm')
+    // };
+    // const template: string = resetPasswordTemplate.passwordResetConfirmationTemplate(templateParams);
+    // emailQueue.addEmailJob('forgotPasswordEmail', {template, receiverEmail: 'annabel41@ethereal.email', subject: 'Password reset confirmation'});
 
-    
+    req.session = { jwt: userJwt };
     res.status(HTTP_STATUS.OK).json({ message: 'User logged successfully', user: existingUser, token: userJwt});
   }
 }
